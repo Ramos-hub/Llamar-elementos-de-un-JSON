@@ -66,13 +66,13 @@ let profesores = [
   const tablaProfesores = document.getElementById("tablaProfesores");
 
   //Llamamos a los elementos del formulario
-  const txtNombre = document.getElementById(txtNombre);
-  const txtApellido = document.getElementById(txtApellido);
-  const txtGrado = document.getElementById(txtGrado);
-  const txtEdad = document.getElementById(txtEdad);
-  const txtModulo1 = document.getElementById(txtModulo1);
-  const txtModulo2 = document.getElementById(txtModulo2);
-  const btnAgregar = document.getElementById(btnAgregar);
+  const txtNombre = document.getElementById("txtNombre");
+  const txtApellido = document.getElementById("txtApellido");
+  const txtGrado = document.getElementById("txtGrado");
+  const txtEdad = document.getElementById("txtEdad");
+  const txtModulo1 = document.getElementById("txtModulo1");
+  const txtModulo2 = document.getElementById("txtModulo2");
+  const btnAgregar = document.getElementById("btnAgregar");
 
   /* Funcion para mostrar a los docentes en la tabla */
   function mostrarProfesores(){
@@ -84,13 +84,41 @@ let profesores = [
         `<tr>
             <td>${profesor.nombre}</td>
             <td>${profesor.apellido}</td>
-            <td>${profesor.edad}</td>
             <td>${profesor.grado}</td>
+            <td>${profesor.edad}</td>
             <td>${profesor.modulosImpartidos[0]}</td>
             <td>${profesor.modulosImpartidos[1]}</td>
         </tr>`
     });
   }
 
+  /* Funcion para agregar a los profesores */
+  function agregarProfesores(){
+    const profesor = {
+        nombre: txtNombre.value,
+        apellido: txtApellido.value,
+        grado: txtGrado.value,
+        edad: txtEdad.value,
+        modulosImpartidos: [txtModulo1.value, txtModulo2.value]
+    };
+
+    //Agregar docente al arreglo
+    profesores.push(profesor);
+
+    //Recargar la lista 
+    mostrarProfesores();
+
+    //Limpiar campos
+    txtNombre.textContent = "";
+    txtApellido.textContent = "";
+    txtGrado.textContent = "";
+    txtEdad.textContent = "";
+    txtModulo1.textContent = "";
+    txtModulo2.textContent = "";
+  }
+
   //Llamar a la funcion
   mostrarProfesores();
+
+  //Enlazar el boton con la funcion
+  btnAgregar.addEventListener("click", agregarProfesores)
